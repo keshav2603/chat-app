@@ -62,12 +62,14 @@ export const loginUser = asyncHandler(async(req,res)=>{
         throw new ApiError(400, "invalid password")
     }
     generateTokenAndSetCookie(user._id, res);
-
+    const oldUser = await User.findById(user._id).select("-password")
     res.status(201)
-    .json(new ApiResponse(201, user, "user login successfully"))
+    .json(new ApiResponse(201, oldUser, "user login successfully"))
 
 });
 
-export const logoutUser= (req,res)=>{
-    console.log("logout user")
-}
+export const logoutUser =asyncHandler( async(req, res)=>{
+    res.cookie("jwt", "", {maxAge:0});
+    res.status(201)
+    .json(new ApiResponse(201,{}, "user logout successfully"))
+}) 
