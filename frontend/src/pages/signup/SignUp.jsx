@@ -12,15 +12,16 @@ const SignUp = () => {
     gender:""
   })
   
-  const handleCheckBoxChange = (gender) =>{
-    setInputs({...inputs, gender})
-  }
+  const { signup, loading } = useSignup(); // Use the custom hook
 
-  const handleSubmit = async (e)=>{
+  const handleCheckBoxChange = (gender) => {
+    setInputs({ ...inputs, gender });
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    useSignup(inputs);
-
-  }
+    await signup(inputs);
+  };
 
   return (
     <div className='flex flex-col items-center justify-center min-w-96 mx-auto '>
