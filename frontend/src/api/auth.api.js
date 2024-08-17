@@ -9,3 +9,12 @@ export const signupUser = async ({ fullName, username, password, confirmPassword
         throw error;  
     }
 };
+
+export const logoutUser = async()=>{
+    try {
+        const response = await api.post("/api/auth/logout",{});
+        return response;
+    } catch (error) {
+        
+    }
+}
