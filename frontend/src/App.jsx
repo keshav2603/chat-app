@@ -7,7 +7,7 @@ import { Toaster } from 'react-hot-toast';
 import { Navigate } from 'react-router-dom';
 import { useAuthContext } from './context/AuthContext.jsx';
 function App() {
-  const {authUser,setAuthUser}=useAuthContext()
+  const {authUser}=useAuthContext()
   return (
     <div className='p-4 h-screen flex items-center justify-center'>
       <Routes>

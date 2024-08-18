@@ -6,7 +6,7 @@ import { useAuthContext } from '../context/AuthContext.jsx';
 // Custom Hook
 const useSignup = () => {
   const [loading, setLoading] = useState(false);
-  const {authUser,setAuthUser}=useAuthContext()
+  const {setAuthUser}=useAuthContext()
   const signup = async ({ fullName, username, password, confirmPassword, gender }) => {
     const success = handleInputError({ fullName, username, password, confirmPassword, gender });
     if (!success) return;
@@ -16,8 +16,8 @@ const useSignup = () => {
       const response = await signupUser({ fullName, username, password, confirmPassword, gender });
 
       if (response.status === 200 || response.status === 201) {
-        localStorage.setItem("chat-user", JSON.stringify(response))
-        setAuthUser(response);
+        localStorage.setItem("chat-user", JSON.stringify(response.data))
+        setAuthUser(response.data);
       } else {
         console.error('Registration error:', response.data.message);
       }
