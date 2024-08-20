@@ -1,23 +1,26 @@
 import express from "express";
 import cookieParser from "cookie-parser";
-import cors from "cors"
+import cors from "cors";
+
 const app = express();
 
-app.use(cors());
+// CORS configuration
+app.use(cors({
+    origin: 'http://localhost:5173', // Your frontend URL
+    credentials: true // Allow cookies to be sent with requests
+}));
+
 app.use(express.json());
 app.use(cookieParser());
 
-// routes import
-import authRoutes from "./routes/auth.routes.js"
-import messageRoutes from "./routes/message.routes.js"
-import userRoutes from "./routes/user.routes.js"
+// Routes import
+import authRoutes from "./routes/auth.routes.js";
+import messageRoutes from "./routes/message.routes.js";
+import userRoutes from "./routes/user.routes.js";
 
-
-// routes declaration
-
+// Routes declaration
 app.use("/api/auth", authRoutes);
 app.use("/api/message", messageRoutes);
 app.use("/api/user", userRoutes);
 
-
-export {app}; 
+export { app };
