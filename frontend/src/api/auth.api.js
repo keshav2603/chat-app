@@ -21,10 +21,30 @@ export const logoutUser = async()=>{
 }
 export const loginUser = async({username, password})=>{
     try {
-        const response = await api.post("api/auth/login", {username, password});
+        const response = await api.post("/api/auth/login", {username, password});
         return response;
     } catch (error) {
         console.error('Error in loginUser', error.message);
         throw error;  
+    }
+}
+
+export const getUsers = async () => {
+    try {
+        const response = await api.get("/api/user/");
+        return response;
+    } catch (error) {
+        console.error('Error in getting users', error.message);
+        throw error;
+    }
+}
+
+export const sendMessage = async ({_id, message})=>{
+    try {
+        const response = await api.post(`/send/${_id}`, message);
+        return response;
+    } catch (error) {
+        console.error('Error in sending message apifunction', error.message);
+        throw error;
     }
 }

@@ -11,6 +11,7 @@ export const generateTokenAndSetCookie = (userID, res) => {
             sameSite: "lax", // Prevent CSRF attacks
             secure: process.env.NODE_ENV === "production", // Use secure in production
         });
+        console.log(token);
     } catch (error) {
         throw new Error("Failed to generate token and set cookie");
     }
