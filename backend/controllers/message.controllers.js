@@ -57,7 +57,8 @@ export const getMessage = asyncHandler(async(req, res)=>{
     }).populate("messages")
 
     if(!conversation){
-        throw new ApiError(404, "conversation not found");
+        res.status(200).
+        json(new ApiResponse(200,[],"start new conversation"));
     }
 
     res.status(201)

@@ -39,12 +39,31 @@ export const getUsers = async () => {
     }
 }
 
-export const sendMessage = async ({_id, message})=>{
+// Assuming `api` is an instance of axios or a similar library
+export const sendMessages = async (_id, message) => {
     try {
-        const response = await api.post(`/send/${_id}`, message);
+        // Make sure `api` is configured properly
+        const response = await api.post(`/api/message/send/${_id}`, {
+            message
+        }, {
+            headers: {
+                "Content-Type": "application/json",
+            }
+        });
+
         return response;
     } catch (error) {
         console.error('Error in sending message apifunction', error.message);
+        throw error; // Rethrow the error to handle it in the calling function
+    }
+}
+
+export const getMessage = async(_id)=>{
+    try {
+        const response = await api.get(`/api/message/${_id}`)
+        return response.data;
+    } catch (error) {
+        console.error('Error in get message apifunction', error.message);
         throw error;
     }
 }
