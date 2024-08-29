@@ -4,6 +4,7 @@ import {asyncHandler} from "../utils/asyncHandler.js";
 import {Message} from "../models/message.model.js"
 import { User } from "../models/user.model.js";
 import {Conversation} from "../models/conversation.model.js"
+import { getReceiverSocketId, io } from "../socket/socket.js";
 
 export const sendMessage = asyncHandler(async(req,res)=>{
     const {message} = req.body;
@@ -43,6 +44,11 @@ export const sendMessage = asyncHandler(async(req,res)=>{
     // sockit.io functionality have to do later
     await conversation.save();
 
+    const receiverSocketId = getReceiverSocketId(receiverId);
+    if(receiverSocketId){
+        io.to(receiverSocketId).emit("newMessage", newMessage)
+    }
+
     res.status(201)
     .json(new ApiResponse(201, newMessage,"message send sucessfully"
     ))
@@ -60,6 +66,7 @@ export const getMessage = asyncHandler(async(req, res)=>{
         res.status(200).
         json(new ApiResponse(200,[],"start new conversation"));
     }
+
 
     res.status(201)
     .json(new ApiResponse(201,conversation.messages, "message fetch successfully"))

@@ -11,7 +11,7 @@ function Message({ message }) {
   const chatClassName = fromMe ? "chat-end" : "chat-start";
   const profilePic = fromMe ? authUser.data.profilePic : selectedConversation?.profilePic;
   const bubbleBgColor = fromMe ? "bg-blue-500" : "";
-
+  const shakeClass = message.shouldShake ? "shake" : "";
   // Fallback for profilePic if not available
   const defaultProfilePic = "path/to/default/profile-pic.jpg"; // Replace with actual path
 
@@ -26,7 +26,7 @@ function Message({ message }) {
           />
         </div>
       </div>
-      <div className={`chat-bubble text-white ${bubbleBgColor}`}>
+      <div className={`chat-bubble text-white ${bubbleBgColor} ${shakeClass} pb-2`}>
         {message.message}
       </div>
       <div className='chat-footer opacity-50 text-xs flex gap-1 items-center text-white'>
