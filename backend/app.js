@@ -6,7 +6,7 @@ import { app } from "./socket/socket.js";
 // const app = express();
 // CORS configuration
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: "https://chat-app-rust-tau.vercel.app",
     credentials: true
 }));
 // const __dirname = path.resolve();
