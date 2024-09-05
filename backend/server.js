@@ -1,11 +1,13 @@
 import dotenv from "dotenv";
-import connectDB from "./db/index.js";
-import { server } from "./socket/socket.js";
 
 // Load environment variables
 dotenv.config({
     path: "./.env"
-});
+})
+
+import connectDB from "./db/index.js";
+import { server } from "./socket/socket.js";
+import { app } from "./app.js";
 
 // Connect to MongoDB and start the server
 connectDB()
